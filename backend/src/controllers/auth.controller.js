@@ -6,11 +6,11 @@ import cloudinary from "../lib/cloudinary.js";
 export const login = async (req, res) => {
     const {email, password} = req.body;
     try {
-        const user = User.findOne({email});
+        const user = await User.findOne({email});
         if(!user){
             return res.status(400).json({message : "User doesn't exist."});
         }
-        const isPasswordCorrect = bcrypt.compare(password, user.password);
+        const isPasswordCorrect = await bcrypt.compare(password, user.password);
         if(!isPasswordCorrect) return res.status(400).json({message: "email or password is incorrect."});
         generateToken(user._id, res);
         return res.status(201).json({
