@@ -5,6 +5,11 @@ const UserDebateSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    // privacy: {
+    //     type: String,
+    //     enum: ["private", "public"],
+    //     required: true,
+    // },
     description:{
         type: String,
         trim: true,

@@ -11,7 +11,7 @@ const ArgumentSchema = new mongoose.Schema({
         required: true,
         enum: ["CoreDebate", "UserDebate"],
     },
-    userId: {
+    authorId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true,
@@ -19,7 +19,8 @@ const ArgumentSchema = new mongoose.Schema({
     content: {
         type: String,
         required: true,
-
+        trim: true,
+        maxlength: 1000,
     },
     side:{
         type: String,

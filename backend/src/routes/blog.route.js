@@ -3,12 +3,12 @@ import { commentOnBlog, deleteBlog, deleteComment, editBlog, getBlog, getComment
 import {protectRoute} from "../middlewares/auth.middleware"
 const router = express.Router();
 
-router.get('/blog/:id', getBlog);
-router.get('/blog/:id/comments', getComments);
-router.post('/blog', protectRoute, postBlog);
-router.post('/blog/like/:id',protectRoute, likeBlog);
-router.post('/blog/comment/:id', protectRoute, commentOnBlog);
-router.post('/blog/unlike/:id', protectRoute, unlikeBlog);
-router.put('/blog/edit/:id',protectRoute, editBlog);
-router.delete('/blog/deleteComment/:blogId/:commentId',protectRoute, deleteComment);
-router.delete('/blog/deleteBlog/:id',protectRoute, deleteBlog);
+router.get('/:id', getBlog);
+router.get('/:id/comments', getComments);
+router.post('/', protectRoute, postBlog);
+router.post('/like/:id',protectRoute, likeBlog);
+router.post('/comment/:id', protectRoute, commentOnBlog);
+router.post('/unlike/:id', protectRoute, unlikeBlog);
+router.put('/edit/:id',protectRoute, editBlog);
+router.delete('/deleteComment/:blogId/:commentId',protectRoute, deleteComment);
+router.delete('/deleteBlog/:id',protectRoute, deleteBlog);
