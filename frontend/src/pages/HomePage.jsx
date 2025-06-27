@@ -27,9 +27,6 @@ const dummyBlogs = [
 
 const HomePage = () => {
   const {user, isAuthenticated, logout, checkAuth, loading} = useAuth();
-  useEffect(() => {
-    checkAuth();
-  }, []);
   if(loading) return <p>Checking Auth...</p>
   return (
     <div>

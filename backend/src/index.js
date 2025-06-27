@@ -4,6 +4,7 @@ import blogRoutes from "./routes/blog.route.js"
 import debateRoutes from "./routes/debate.route.js"
 import { connectDB } from "./lib/db.js";
 import cors from "cors"
+import cookieParser from "cookie-parser"
 
 const app = express();
 app.use(cors({
@@ -12,6 +13,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/blog", blogRoutes);

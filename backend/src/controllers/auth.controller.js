@@ -34,7 +34,7 @@ export const signup = async (req, res) => {
         if(password.length < 6){
             return res.status(600).json({message: "password must be atleast 6 characters"});
         }
-        const user = User.findOne({email})
+        const user = await User.findOne({email})
         if(user) {
             res.status(400).json({message: "User already exists. Please try to login."});
         }
@@ -92,7 +92,7 @@ export const updateProfile = async (req, res) => {
         const uploadResponse = await cloudinary.uploader.upload(profilePic);
         console.log("cloudinary response: ", uploadResponse);
 
-        const user = await User.findOneAndUpdate(email, 
+        const user = await User.findOneAndUpdate({email}, 
             { profilePic: uploadResponse.secure_url},
             { new: true },
         )

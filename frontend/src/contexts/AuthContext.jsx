@@ -43,5 +43,7 @@ export const AuthProvider = ({children}) => {
         </AuthContext.Provider>
     )
 }
-
+useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
 export const useAuth = () => useContext(AuthContext);
