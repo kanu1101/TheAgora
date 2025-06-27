@@ -1,6 +1,6 @@
 import express from "express";
-import { commentOnBlog, deleteBlog, deleteComment, editBlog, getBlog, getComments, likeBlog, postBlog, unlikeBlog } from "../controllers/blog.controller";
-import {protectRoute} from "../middlewares/auth.middleware"
+import { commentOnBlog, deleteBlog, deleteComment, editBlog, getBlog, getComments, likeBlog, postBlog, unlikeBlog } from "../controllers/blog.controller.js";
+import {protectRoute} from "../middlewares/auth.middleware.js"
 const router = express.Router();
 
 router.get('/:id', getBlog);
@@ -12,3 +12,6 @@ router.post('/unlike/:id', protectRoute, unlikeBlog);
 router.put('/edit/:id',protectRoute, editBlog);
 router.delete('/deleteComment/:blogId/:commentId',protectRoute, deleteComment);
 router.delete('/deleteBlog/:id',protectRoute, deleteBlog);
+
+
+export default router

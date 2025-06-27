@@ -13,7 +13,7 @@ const UserDebateSchema = new mongoose.Schema({
     description:{
         type: String,
         trim: true,
-        maxlength: 1000,
+        maxlength: 100,
     },
     authorId: {
         type: mongoose.Schema.Types.ObjectId,

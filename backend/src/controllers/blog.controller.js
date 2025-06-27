@@ -1,6 +1,17 @@
 import Blog from "../models/blog.model.js"
 import BlogComment from "../models/blogComments.model.js";
+import User from "../models/user.model.js"
+export const getBlogs = async (req, res) => {
+    try {
+        const {page = 1, limit = 10} = req.query;
+        const blogs = await Blog.find().skip((page-1)*10).limit(Number(limit)).populate("authorId", "userName profilePic");
 
+        return res.status(200).json(blogs);
+    } catch (error) {
+        console.log("error in getBlogs controller", error.message);
+        return res.status(500).json({message: "internal server error"});
+    }
+}
 export const getBlog = async (req, res) => {
     try {
         const {id: blogId} = req.params;

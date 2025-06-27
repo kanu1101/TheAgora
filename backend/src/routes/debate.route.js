@@ -1,5 +1,5 @@
 import express from "express";
-import { createUserDebate, deleteArgument, deleteUserDebate, editArgument, editUserDebate, getArgumentsForDebate, getCoreDebates, getUserDebates, makeArgument, searchUserDebates } from "../controllers/debate.controller";
+import { createUserDebate, deleteArgument, deleteUserDebate, editArgument, editUserDebate, getArgumentsForDebate, getCoreDebates, getUserDebates, makeArgument, searchUserDebates } from "../controllers/debate.controller.js";
 import {protectRoute} from "../middlewares/auth.middleware.js"
 const router = express.Router();
 
