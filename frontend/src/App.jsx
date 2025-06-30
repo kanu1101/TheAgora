@@ -10,7 +10,9 @@ import { useAuth } from './contexts/AuthContext'
 
 function App() {
   const {user, checkAuth, loading} = useAuth();
-  
+  useEffect(() => {
+        checkAuth();
+      }, [checkAuth]);
   if(loading) return <p>Checking Auth...</p>
   return (
     <>

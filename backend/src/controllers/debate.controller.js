@@ -31,7 +31,7 @@ export const createUserDebate = async (req, res) => {
         const trimmedDescription = description?.trim() || "";
         if(!trimmedTitle) return res.status(400).json({message: "fill in the required fields"});
         const {_id: userId} = req.user;
-        const debate = new CoreDebate({
+        const debate = new UserDebate({
             authorId: userId,
             title: trimmedTitle,
             description: trimmedDescription,
@@ -106,7 +106,7 @@ export const getArgumentsForDebate = async (req, res) => {
             return res.status(400).json({message: "invalid debate type"});
         }
         const debateModel = type === "core" ? CoreDebate : UserDebate;
-        const debate = await debateModel.findById(debateId).populate("arguments");
+        const debate = await debateModel.findById(debateId).populate({path : "arguments", populate: {path: "authorId", select: "userName"},});
         if(!debate){
             return res.status(404).json({message: "debate not found."});
         }

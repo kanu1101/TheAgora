@@ -20,7 +20,7 @@ const ArgumentSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        maxlength: 1000,
+        // maxlength: 1000,
     },
     side:{
         type: String,
