@@ -16,7 +16,8 @@ export const getCoreDebates = async (req, res) => {
 }
 export const getUserDebates = async (req, res) => {
     try {
-        const debateTitles = await UserDebate.find({}, "title");
+        const {page = 1, limit = 10} = req.query;
+        const debateTitles = await UserDebate.find().skip((page-1)*10).limit(Number(limit)).populate({path: "authorId", select: "userName profilePic"});
         if(debateTitles.length === 0) return res.status(404).json({message: "couldn't find what you were looking for."});
         return res.status(200).json(debateTitles);
     } catch (error) {
@@ -106,12 +107,12 @@ export const getArgumentsForDebate = async (req, res) => {
             return res.status(400).json({message: "invalid debate type"});
         }
         const debateModel = type === "core" ? CoreDebate : UserDebate;
-        const debate = await debateModel.findById(debateId).populate({path : "arguments", populate: {path: "authorId", select: "userName"},});
+        const debate = await debateModel.findById(debateId).populate({path : "arguments", populate: {path: "authorId", select: "userName profilePic"},});
         if(!debate){
             return res.status(404).json({message: "debate not found."});
         }
 
-        return res.status(200).json(debate.arguments);
+        return res.status(200).json(debate);
         
     } catch (error) {
         console.log("error in getArgumentsForDebate controller", error.message);

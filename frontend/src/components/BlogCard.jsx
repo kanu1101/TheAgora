@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import placeholder from "../assets/placeholder.jpg"
+import useBlog from "../contexts/BlogContext.jsx"
+
 const BlogCard = ({title, authorName, profilePic, date}) => {
+
   return (
     <>
         <div className='w-1/4 h-1/5 bg-amber-400 rounded-md'>

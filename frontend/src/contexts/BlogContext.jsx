@@ -23,10 +23,10 @@ export const BlogProvider = ({ children }) => {
     }
   };
 
-  const getBlog = async (authorId) => {
+  const getBlog = async (blogId) => {
     setLoading(true);
     try {
-      const res = await axiosInstance.get(`/blog/${authorId}`);
+      const res = await axiosInstance.get(`/blog/${blogId}`);
       setBlog(res.data);
     } catch (error) {
       console.log("error in getBlog method", error.response?.data?.message || error.message);

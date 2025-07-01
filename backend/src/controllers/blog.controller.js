@@ -14,8 +14,8 @@ export const getBlogs = async (req, res) => {
 }
 export const getBlog = async (req, res) => {
     try {
-        const {id: blogId} = req.params;
-        const blog = await Blog.findById(blogId);
+        const {blogId} = req.params;
+        const blog = await Blog.findById(blogId).populate("authorId", "profilePic userName");
         if(!blog){
             return res.status(400).json({message:"Couldn't find the blog you were looking for."});
         }

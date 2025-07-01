@@ -4,7 +4,7 @@ import {protectRoute} from "../middlewares/auth.middleware.js"
 const router = express.Router();
 
 router.get('/getBlogs', getBlogs);
-router.get('/:id', getBlog);
+router.get('/:blogId', getBlog);
 router.get('/:id/comments', getComments);
 router.post('/createBlog', protectRoute, postBlog);
 router.post('/:id/like',protectRoute, likeBlog);

@@ -6,7 +6,7 @@ const DebateContext = createContext();
 
 export const DebateProvider = ({ children }) => {
   const [debates, setDebates] = useState([]);
-  const [argumentsList, setArgumentsList] = useState([]);
+  const [debate, setDebate] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const getCoreDebates = async () => {
@@ -35,14 +35,14 @@ export const DebateProvider = ({ children }) => {
     }
   };
 
-  const getArgumentsForDebate = async (debateId, type) => {
+  const getDebate = async (debateId, type) => {
     setLoading(true);
     try {
       const res = await axiosInstance.get(`/debate/${debateId}/arguments`, { params: { type } });
-      setArgumentsList(res.data);
+      setDebate(res.data);
     } catch (error) {
       console.error("getArguments error:", error.response?.data?.message || error.message);
-      setArgumentsList([]);
+      setDebate();
     } finally {
       setLoading(false);
     }
@@ -84,7 +84,7 @@ export const DebateProvider = ({ children }) => {
         argumentsList,
         getCoreDebates,
         getUserDebates,
-        getArgumentsForDebate,
+        getDebate,
         createArgument,
         deleteArgument,
         editArgument,
