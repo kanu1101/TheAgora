@@ -22,6 +22,7 @@ function App() {
         <Route path='/signup' element={!user ? <Signup/> : <Navigate to="/"/>} />
         <Route path='/profile' element={user ? <Profile/> : <Navigate to="/login"/>} />
         <Route path='/debateList' element={ <DebateList/> }/>
+        <Route path='/blog/:id' element={<Blog/>} />
       </Routes>
     </>
   )

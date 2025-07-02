@@ -52,9 +52,11 @@ export const BlogProvider = ({ children }) => {
   const postBlog = async (blogData) => {
     setLoading(true);
     try {
-      await axiosInstance.post(`/blog/createBlog`, blogData);
+      const res = await axiosInstance.post(`/blog/createBlog`, blogData);
+      return res.data
     } catch (error) {
       console.log("error in postBlog", error.response?.data?.message || error.message);
+      return null;
     } finally {
       setLoading(false);
     }
