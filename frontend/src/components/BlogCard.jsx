@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import placeholder from "../assets/placeholder.jpg"
-import useBlog from "../contexts/BlogContext.jsx"
+import {useBlog} from "../contexts/BlogContext.jsx"
 
 const BlogCard = ({title, authorName, profilePic, date}) => {
 

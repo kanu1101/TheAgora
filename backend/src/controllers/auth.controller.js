@@ -55,8 +55,9 @@ export const signup = async (req, res) => {
                 email: newUser.email,
                 profilePic: newUser.profilePic,
             })
-            
+            console.log("user created successfully");
         }
+
 
     } catch (error) {
         console.log("error in signup authController", error.message)
@@ -66,6 +67,7 @@ export const signup = async (req, res) => {
 export const logout = (req, res) => {
     try {
         res.cookie("jwt", "", {maxAge: 0});
+        console.log("logged out succesfully.")
         return res.status(201).json({message: "Logged Out Successfully"});
     } catch (error) {
         console.log("error in auth controller logout", error.message);

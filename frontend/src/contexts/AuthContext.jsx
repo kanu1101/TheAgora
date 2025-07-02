@@ -10,8 +10,14 @@ export const AuthProvider = ({children}) => {
     const isAuthenticated = !!user;
 
     const login = async (credentials) => {
-        const res = await axiosInstance.post('/auth/login', credentials);
-        setUser(res.data);
+        try {
+            const res = await axiosInstance.post('/auth/login', credentials);
+            setUser(res.data);
+            return true;
+        } catch (error) {
+            console.log("error in login method", error.response?.data?.message || error.message);
+            return false;
+        }
     }
 
     const register = async (credentials) => {
@@ -20,8 +26,12 @@ export const AuthProvider = ({children}) => {
     }
 
     const logout = async () => {
-        await axiosInstance.get('/auth/logout');
-        setUser(null);  
+        try {
+            await axiosInstance.get('/auth/logout');
+            setUser(null);  
+        } catch (error) {
+            alert("error loggin out");
+        }
     }
 
     const checkAuth = async () => {

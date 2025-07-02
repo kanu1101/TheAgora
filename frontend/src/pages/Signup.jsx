@@ -4,13 +4,13 @@ import { useAuth } from '../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 
 const Signup= () => {
-    const {signup} = useAuth();
+    const {register} = useAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [username, setUsername] = useState("");
+    const [userName, setUsername] = useState("");
     const handleSubmit = (e) => {
         e.preventDefault();
-        signup({userName: username, password, email})
+        register({userName, password, email})
     }
 
   return (
@@ -18,7 +18,7 @@ const Signup= () => {
         <div>
             <form className=''>
                 <p>Username</p>
-                <input type="text" placeholder='username' value={username} onChange={(e) => {setUsername(e.target.value)}} required />
+                <input type="text" placeholder='username' value={userName} onChange={(e) => {setUsername(e.target.value)}} required />
                 <p>Email</p>
                 <input type="email" placeholder='a@email.com' value={email} onChange={(e) => {setEmail(e.target.value)}} required/>
                 <p>password</p>
