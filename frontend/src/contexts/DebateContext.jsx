@@ -22,6 +22,18 @@ export const DebateProvider = ({ children }) => {
     }
   };
 
+  const createDebate = async (debateData) => {
+    setLoading(true);
+    try {
+      const res = await axiosInstance.post('/debate/createUserDebate', debateData);
+      setDebate(res.data);
+    } catch (error) {
+      console.error('createDebate error', error.response?.data?.message || error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   const getUserDebates = async () => {
     setLoading(true);
     try {
@@ -88,6 +100,7 @@ export const DebateProvider = ({ children }) => {
         createArgument,
         deleteArgument,
         editArgument,
+        createDebate,
         loading,
       }}
     >

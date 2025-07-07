@@ -7,6 +7,11 @@ import Signup from './pages/Signup'
 import Profile from './pages/Profile'
 import DebateList from './pages/DebateList'
 import { useAuth } from './contexts/AuthContext'
+import Blog from './pages/Blog'
+import CreateBlog from './pages/createBlog'
+import Debate from './pages/Debate'
+import Settings from './pages/Settings'
+import CreateDebate from './pages/createDebate'
 
 function App() {
   const {user, checkAuth, loading} = useAuth();
@@ -23,6 +28,11 @@ function App() {
         <Route path='/profile' element={user ? <Profile/> : <Navigate to="/login"/>} />
         <Route path='/debateList' element={ <DebateList/> }/>
         <Route path='/blog/:id' element={<Blog/>} />
+        <Route path='/debate/:id' element={<Debate/>} />
+        <Route path='/createBlog' element={<CreateBlog/>} />
+        <Route path='/settings' element={<Settings />} />
+        <Route path='/createDebate' element={<CreateDebate />} />
+
       </Routes>
     </>
   )

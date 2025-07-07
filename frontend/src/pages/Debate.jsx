@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from "../components/Navbar"
 import ArgumentCard from '../components/ArgumentCard'
 import { useDebate } from '../contexts/DebateContext'
@@ -25,13 +25,21 @@ import { useParams } from 'react-router-dom'
 
 const Debate = () => {
   const {debateId} = useParams();
-  const {getDebate, debate} = useDebate();
+  const {getDebate, debate, createArgument} = useDebate();
+  const [argumentContent, setArgumentContent] = useState({debateId: debate._id, content: "", side: "", type: "for"});
+
+
+  const handleClick = async () => {
+    const trimmedArgument = argument.trim();
+    if(!trimmedArgument) return;
+    await createArgument(argumentContent);
+  }
 
   useEffect(() => {
     if(debateId){
       getDebate(debateId);
     }
-  }, [debateId]);
+  }, [debateId, debate.arguments]);
 
   return (
     <div>
@@ -49,6 +57,18 @@ const Debate = () => {
                 />
             ))
             }
+            <div>
+              <div className='flex gap-2'>
+                <button className={`${argumentContent.side} === "for" ? outline-red-500 : outline-none `} onClick={setArgumentContent({...argumentContent, side: "for"})}>For</button>
+                <button className={`${argumentContent.side} === "against" ? outline-red-500 : outline-none `} onClick={setArgumentContent({...argumentContent, side: "against"})}>Against</button>
+                
+                {/*for and against buttons to be created here*/}
+              </div>
+              <div className='flex gap-2'>
+                <input type="text" value={argumentContent} onChange={() => setArgumentContent({...argumentContent, content: value })} placeholder='write your argument here' />
+                <button onClick={handleClick}>Send</button>
+              </div>
+            </div>
         </div>
       </div>
     </div>

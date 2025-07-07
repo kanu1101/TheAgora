@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom'
 import Navbar from '../components/Navbar';
 
 
-const createBlog = () => {
+const CreateBlog = () => {
     const [formData, setFormData] = useState({title: "", content: ""});
     const {postBlog} = useBlog();
     const navigate = useNavigate();
@@ -17,7 +17,11 @@ const createBlog = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const blog = await postBlog(formData);
-        navigate(`/blog/${blog._id}`)
+        if(blog && blog._id){
+            navigate(`/blog/${blog._id}`)
+        } else {
+            alert("something went wrong while creating the blog");
+        }
     }
 
     return (
@@ -25,13 +29,13 @@ const createBlog = () => {
         <Navbar/>
         <form onSubmit={handleSubmit}>
             <p>Title</p>
-            <input type="text" placeholder='title' value={formData.title} onChange={() => setFormData({...formData, title: e.target.value})}/>
+            <input type="text" placeholder='title' name='title' value={formData.title} onChange={handleChange}/>
             <p>Blog Content</p>
-            <input type="text" placeholder='The Blog goes here...' value={formData.content} onChange={() => setFormData({...formData, content: e.target.value})} />
+            <input type="text" name='content' placeholder='The Blog goes here...' value={formData.content} onChange={handleChange} />
             <button type='submit' >Create Blog</button>
         </form>
     </>
   )
 }
 
-export default createBlog
+export default CreateBlog
