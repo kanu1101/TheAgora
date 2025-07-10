@@ -22,6 +22,20 @@ export const DebateProvider = ({ children }) => {
     }
   };
 
+  const getAuthorDebates = async () => {
+    setLoading(true);
+    try {
+      const res = await axiosInstance.get(`/debate/getAuthorDebates`);
+      setDebates(res.data);
+    } catch (error) {
+      alert("error in fetching Debates by you.")
+      console.log("error in getAuthorDebates", error.response?.data?.message || error.message);
+      setDebates(null);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   const createDebate = async (debateData) => {
     setLoading(true);
     try {
@@ -89,6 +103,15 @@ export const DebateProvider = ({ children }) => {
     }
   };
 
+  const deleteDebate = async (debateId) => {
+    try {
+      await axiosInstance.delete(`/debate/${debateId}`);
+    } catch (error) {
+      console.log("error in deleteDebate", error.response?.data?.message || error.message);
+      alert("unable to delete the requested debate");
+    }
+  }
+
   return (
     <DebateContext.Provider
       value={{
@@ -101,6 +124,7 @@ export const DebateProvider = ({ children }) => {
         deleteArgument,
         editArgument,
         createDebate,
+        getAuthorDebates,
         loading,
       }}
     >

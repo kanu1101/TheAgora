@@ -23,9 +23,6 @@ import { useDebate } from '../contexts/DebateContext'
 
 const DebateList = () => {
   const {getUserDebates, debates} = useDebate();
-
-
-
   useEffect(() => {
     getUserDebates();
   } , []);

@@ -119,6 +119,20 @@ export const getArgumentsForDebate = async (req, res) => {
         return res.status(500).json({message: "Internal Server Error"});
     }
 }
+
+export const getAuthorDebates = async (req, res) => {
+    try {
+        const {userId : authorId} = req.user;
+        if(!authorId) return res.status(403).json({message: "something went wrong"});
+        const debates = await UserDebate.find({authorId}).select("title description");
+        if(!debates) return res.status(404).json({message: "debates not found"});
+        return res.status(200).json(debates);
+    } catch (error) {
+        console.log("error in getAuthorDebates controller", error.message);
+        return res.status(500).json({message: "Internal Server Error"});
+    }
+}
+
 export const makeArgument = async (req, res) => {
     try {
         const {debateId} = req.params;

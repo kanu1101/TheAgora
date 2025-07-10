@@ -54,13 +54,15 @@ const Debate = () => {
                     side = {argument.side}
                     authorName = {argument.authorId.userName}
                     profilePic = {argument.authorId.profilePic}
+                    authorId = {argument.authorId}
+                    argumentId = {argument._id}
                 />
             ))
             }
             <div>
               <div className='flex gap-2'>
-                <button className={`${argumentContent.side} === "for" ? outline-red-500 : outline-none `} onClick={setArgumentContent({...argumentContent, side: "for"})}>For</button>
-                <button className={`${argumentContent.side} === "against" ? outline-red-500 : outline-none `} onClick={setArgumentContent({...argumentContent, side: "against"})}>Against</button>
+                <button className={`${argumentContent.side} === "for" ? outline-red-500 : outline-none `} onClick={() => setArgumentContent({...argumentContent, side: "for"})}>For</button>
+                <button className={`${argumentContent.side} === "against" ? outline-red-500 : outline-none `} onClick={() => setArgumentContent({...argumentContent, side: "against"})}>Against</button>
                 
                 {/*for and against buttons to be created here*/}
               </div>
