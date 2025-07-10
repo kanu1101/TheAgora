@@ -126,6 +126,7 @@ export const DebateProvider = ({ children }) => {
         createDebate,
         getAuthorDebates,
         loading,
+        debate,
       }}
     >
       {children}

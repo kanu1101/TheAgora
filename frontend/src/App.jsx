@@ -12,6 +12,8 @@ import CreateBlog from './pages/createBlog'
 import Debate from './pages/Debate'
 import Settings from './pages/Settings'
 import CreateDebate from './pages/createDebate'
+import MyBlogs from './pages/MyBlogs'
+import MyDebates from './pages/MyDebates'
 
 function App() {
   const {user, checkAuth, loading} = useAuth();
@@ -32,6 +34,8 @@ function App() {
         <Route path='/createBlog' element={<CreateBlog/>} />
         <Route path='/settings' element={<Settings />} />
         <Route path='/createDebate' element={<CreateDebate />} />
+        <Route path='/myBlogs' element={<MyBlogs/>} />
+        <Route path='/myDebates' element={<MyDebates/>} />
 
       </Routes>
     </>
