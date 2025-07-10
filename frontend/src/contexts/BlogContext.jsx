@@ -36,6 +36,19 @@ export const BlogProvider = ({ children }) => {
     }
   };
 
+  const getAuthorBlogs = async () => {
+    setLoading(true);
+    try {
+      const res = await axiosInstance.get('/blog/getAuthorBlogs');
+      setBlogs(res.data);
+    } catch (error) {
+      console.log("error in getAuthorBlogs method in BlogContext", error.response?.data?.message || error.message);
+      setBlogs(null);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   const getComments = async (blogId) => {
     setLoading(true);
     try {
@@ -144,6 +157,7 @@ export const BlogProvider = ({ children }) => {
         unlikeBlog,
         editBlog,
         deleteComment,
+        getAuthorBlogs,
         deleteBlog,
       }}
     >

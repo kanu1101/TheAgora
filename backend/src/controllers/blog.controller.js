@@ -71,6 +71,19 @@ export const likeBlog = async (req, res) => {
         return res.status(500).json({ message: "Internal Server Error" });
     }
 }
+
+export const getAuthorBlogs = async (req, res) => {
+    try {
+        const {user} = req.user;
+        const blogs = await Blog.find({authorId: user._id}).populate("authorId", "username profilePic");
+        if(!blogs) return res.status(404).json({message: "no blogs found."});
+        return res.status(200).json(blogs);
+    } catch (error) {
+        console.log("error in getAuthorBlogs blog controller", error.message);
+        return res.status(500).json({message: "Internal Server Error"});
+    }
+}
+
 export const commentOnBlog = async (req, res) => {
     try {
         const {id: blogId} = req.params;
