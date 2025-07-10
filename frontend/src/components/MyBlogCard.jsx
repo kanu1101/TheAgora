@@ -2,14 +2,9 @@ import React, { useEffect } from 'react'
 import placeholder from "../assets/placeholder.jpg"
 import {useBlog} from "../contexts/BlogContext.jsx"
 
-const BlogCard = ({title, authorName, profilePic, date, blogId}) => {
+const BlogCard = ({title, authorName, profilePic, date}) => {
   const {deleteBlog, getAuthorBlogs} = useBlog();
-  const handleDelete = async () => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this blog?");
-    if(!confirmDelete) return;
-    deleteBlog(blogId);
-
-  }
+  
   useEffect(() => {
     getAuthorBlogs();
   }, [deleteBlog])
@@ -23,9 +18,7 @@ const BlogCard = ({title, authorName, profilePic, date, blogId}) => {
                 </div>
                 <p>{authorName}</p>
               </div>
-              <div>
-                <button onClick={handelDelete}>delete</button>
-              </div>
+              
             </div>
             <h2 className='block'>{title}</h2>
             <span>{date}</span>
