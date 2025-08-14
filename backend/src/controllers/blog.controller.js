@@ -71,10 +71,11 @@ export const likeBlog = async (req, res) => {
         return res.status(500).json({ message: "Internal Server Error" });
     }
 }
-
 export const getAuthorBlogs = async (req, res) => {
     try {
-        const {user} = req.user;
+        console.log("req.user: " , req.user);
+        const user = req.user;
+        if(!user) return res.status(404).json({message: "user not found."});
         const blogs = await Blog.find({authorId: user._id}).populate("authorId", "username profilePic");
         if(!blogs) return res.status(404).json({message: "no blogs found."});
         return res.status(200).json(blogs);
@@ -83,7 +84,6 @@ export const getAuthorBlogs = async (req, res) => {
         return res.status(500).json({message: "Internal Server Error"});
     }
 }
-
 export const commentOnBlog = async (req, res) => {
     try {
         const {id: blogId} = req.params;

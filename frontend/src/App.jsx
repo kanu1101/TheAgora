@@ -14,6 +14,7 @@ import Settings from './pages/Settings'
 import CreateDebate from './pages/createDebate'
 import MyBlogs from './pages/MyBlogs'
 import MyDebates from './pages/MyDebates'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
   const {user, checkAuth, loading} = useAuth();
@@ -23,6 +24,7 @@ function App() {
   if(loading) return <p>Checking Auth...</p>
   return (
     <>
+      <Toaster position='top-center' />
       <Routes>
         <Route path='/' element={user? <HomePage/> : <Navigate to="/login"/>}/>
         <Route path='/login' element={!user ? <Login/> : <Navigate to="/"/>}/>

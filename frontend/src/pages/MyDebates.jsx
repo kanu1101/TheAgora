@@ -1,11 +1,14 @@
 import { useDebate } from '../contexts/DebateContext'
 import MyDebateCard from '../components/MyDebateCard';
 import Navbar from '../components/Navbar';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 const MyDebates = () => {
   const {debates, getAuthorDebates} = useDebate();
-  useEffect(async () => {
-    await getAuthorDebates();
+  useEffect(() => {
+    const fetchData = async () => {
+      await getAuthorDebates();
+    }
+    fetchData();
   }, [debates, getAuthorDebates]);
   return (
     <>

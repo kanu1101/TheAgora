@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import MyBlogCard from '../components/BlogCard'
 import { useBlog } from '../contexts/BlogContext'
+import Navbar from '../components/Navbar';
 
 const MyBlogs = () => {
     const {getAuthorBlogs, blogs} = useBlog();
@@ -9,6 +10,7 @@ const MyBlogs = () => {
   } ,[blogs])
   return (
     <div>
+      <Navbar/>
       {blogs.map((blog, index) => {
         <MyBlogCard 
           key={index}

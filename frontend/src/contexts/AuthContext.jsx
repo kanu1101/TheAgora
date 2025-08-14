@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import {Toaster, toast} from 'react-hot-toast'
 import { axiosInstance } from "../lib/axios";
 
 const AuthContext = createContext();
@@ -7,6 +8,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
+    const [isUpdatingProfile, setIsUpdatingProfile] = useState(false);
     const isAuthenticated = !!user;
 
     const login = async (credentials) => {
@@ -46,9 +48,23 @@ export const AuthProvider = ({children}) => {
             setLoading(false);
         }
     }
+
+    const updateProfile = async(file) => {
+        setIsUpdatingProfile(true);
+        try {
+            const res = await axiosInstance.put('/auth/updateProfile', file);
+            setUser(res.data);
+            toast.success("Profile updated.");
+        } catch (error) {
+            console.log("error in updateProfile method in auth context", error.response?.data?.message || error.message);
+            toast.error("couldn't update profile.");
+        } finally{
+            setIsUpdatingProfile(false);
+        }
+    }
     
     return (
-        <AuthContext.Provider value = {{user, checkAuth, logout, login, register, isAuthenticated, loading}}>
+        <AuthContext.Provider value = {{user, checkAuth, logout, login, register, isAuthenticated, loading, updateProfile, isUpdatingProfile}}>
             {children}
         </AuthContext.Provider>
     )

@@ -4,6 +4,7 @@ import {protectRoute} from "../middlewares/auth.middleware.js"
 const router = express.Router();
 
 router.get('/getBlogs', getBlogs);
+router.get('/getAuthorBlogs', protectRoute, getAuthorBlogs);
 router.get('/:blogId', getBlog);
 router.get('/:id/comments', getComments);
 router.post('/createBlog', protectRoute, postBlog);
@@ -13,7 +14,6 @@ router.post('/:id/unlike', protectRoute, unlikeBlog);
 router.put('/:id/edit',protectRoute, editBlog);
 router.delete('/:blogId/deleteComment/:commentId',protectRoute, deleteComment);
 router.delete('/:id/deleteBlog',protectRoute, deleteBlog);
-router.get('/getAuthorBlogs', protectRoute, getAuthorBlogs);
 
 
 export default router

@@ -26,6 +26,7 @@ export const DebateProvider = ({ children }) => {
     setLoading(true);
     try {
       const res = await axiosInstance.get(`/debate/getAuthorDebates`);
+      if(!res) return res.status(404).json({message: "no debates found."});
       setDebates(res.data);
     } catch (error) {
       alert("error in fetching Debates by you.")
@@ -116,15 +117,15 @@ export const DebateProvider = ({ children }) => {
     <DebateContext.Provider
       value={{
         debates,
-        argumentsList,
         getCoreDebates,
         getUserDebates,
         getDebate,
         createArgument,
-        deleteArgument,
         editArgument,
         createDebate,
         getAuthorDebates,
+        deleteArgument,
+        deleteDebate,
         loading,
         debate,
       }}
@@ -134,4 +135,5 @@ export const DebateProvider = ({ children }) => {
   );
 };
 
-export const useDebate = () => useContext(DebateContext);
+const useDebate = () => useContext(DebateContext);
+export {useDebate}

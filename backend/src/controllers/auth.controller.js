@@ -94,13 +94,12 @@ export const updateProfile = async (req, res) => {
         const uploadResponse = await cloudinary.uploader.upload(profilePic);
         console.log("cloudinary response: ", uploadResponse);
 
-        const user = await User.findOneAndUpdate({email}, 
+        const newUser = await User.findOneAndUpdate({email}, 
             { profilePic: uploadResponse.secure_url},
             { new: true },
         )
         console.log("User updated successfully");
-        return res.status(200).json({message: "Profile Picture Updated Successfully"});
-
+        return res.status(200).json(newUser);
     } catch (error) {
         console.log("error in updateProfile controller: ", error.message);
         return res.status(500).json({message: "Internal Server Error"});
