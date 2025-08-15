@@ -5,9 +5,9 @@ const router = express.Router();
 
 router.get('/getBlogs', getBlogs);
 router.get('/getAuthorBlogs', protectRoute, getAuthorBlogs);
-router.get('/:blogId', getBlog);
-router.get('/:id/comments', getComments);
 router.post('/createBlog', protectRoute, postBlog);
+router.get('/:id/comments', getComments);
+router.get('/:blogId', getBlog);
 router.post('/:id/like',protectRoute, likeBlog);
 router.post('/:id/comment', protectRoute, commentOnBlog);
 router.post('/:id/unlike', protectRoute, unlikeBlog);

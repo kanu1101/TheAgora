@@ -24,8 +24,10 @@ export const BlogProvider = ({ children }) => {
   };
 
   const getBlog = async (blogId) => {
+    console.log("getBlog called with", blogId)
     setLoading(true);
     try {
+      console.log("📡 Sending request to:", `/blog/${blogId}`);
       const res = await axiosInstance.get(`/blog/${blogId}`);
       setBlog(res.data);
     } catch (error) {

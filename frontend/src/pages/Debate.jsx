@@ -25,7 +25,7 @@ import { useParams } from 'react-router-dom'
 
 const Debate = () => {
   const {debateId} = useParams();
-  const {getDebate, debate, createArgument} = useDebate();
+  const {getDebate, debate, createArgument, loading} = useDebate();
   const [argumentContent, setArgumentContent] = useState({debateId: debate._id, content: "", side: "", type: "for"});
 
 
@@ -36,10 +36,15 @@ const Debate = () => {
   }
 
   useEffect(() => {
-    if(debateId){
-      getDebate(debateId);
+    const fetchDebate = async () => {
+      if(debateId){
+        await getDebate(debateId);
+      }
     }
+    fetchDebate();
   }, [debateId, debate.arguments]);
+
+  if(loading || !debate) return <h1>Loading...</h1>
 
   return (
     <div>

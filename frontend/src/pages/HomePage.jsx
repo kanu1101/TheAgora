@@ -70,6 +70,7 @@ const HomePage = () => {
             {blogs.map((blog, index) => (
             <BlogCard
               key = {index}
+              blogId = {blog._id}
               title = {blog.title}
               authorName = {blog.authorId.userName}
               profilePic = {blog.authorId.profilePic}

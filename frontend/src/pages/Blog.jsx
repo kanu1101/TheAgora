@@ -12,14 +12,18 @@ import { useParams } from 'react-router-dom'
 const Blog = () => {
   const {blogId} = useParams();
   const {getBlog, loading, blog} = useBlog();
-
+  console.log(blogId);
   useEffect(() => {
-    if(blogId){
-      getBlog(blogId);
+    console.log("useEffect triggered with blodId: ", blogId);
+    const fetchBlog = async () => {
+      if(blogId){
+        await getBlog(blogId);
+      }
     }
-  }, [blogId])
+    fetchBlog();
+  }, [blogId]);
 
-  if(loading) return <p>Loading...</p>
+  if(loading || !blog) return <p>Loading...</p>
 
   return (
     <div>
