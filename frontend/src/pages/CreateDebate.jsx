@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 const CreateDebate = () => {
     const navigate = useNavigate();
-    const {createDebate} = useDebate();
+    const {debate, createDebate} = useDebate();
     const [formData, setFormData] = useState({title: "", description: ""})
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const debate = await createDebate(formData);
+        await createDebate(formData);
         if(debate && debate._id){
             navigate(`/debate/${debate._id}`)
         } else {

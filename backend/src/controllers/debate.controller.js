@@ -28,16 +28,17 @@ export const getUserDebates = async (req, res) => {
 export const createUserDebate = async (req, res) => {
     try {
         const {title, description} = req.body;
+        const {_id : userId} = req.user;
         const trimmedTitle = title.trim();
         const trimmedDescription = description?.trim() || "";
         if(!trimmedTitle) return res.status(400).json({message: "fill in the required fields"});
-        const {_id: userId} = req.user;
         const debate = new UserDebate({
             authorId: userId,
             title: trimmedTitle,
             description: trimmedDescription,
         })
         await debate.save();
+        // console.log("debate created successfully.");
         return res.status(200).json(debate);
     } catch (error) {
         console.log("error in createUserDebate controller", error.message);
@@ -101,6 +102,7 @@ export const searchUserDebates = async (req, res) => {
 }
 export const getArgumentsForDebate = async (req, res) => {
     try {
+        console.log("starting getArguementsForDebate...");
         const {debateId} = req.params;
         const {type} = req.query;
         if(!["core", "user"].includes(type)){
@@ -111,7 +113,7 @@ export const getArgumentsForDebate = async (req, res) => {
         if(!debate){
             return res.status(404).json({message: "debate not found."});
         }
-
+        console.log("debate arguments sent.")
         return res.status(200).json(debate);
         
     } catch (error) {

@@ -32,7 +32,7 @@ function App() {
         <Route path='/profile' element={user ? <Profile/> : <Navigate to="/login"/>} />
         <Route path='/debateList' element={ <DebateList/> }/>
         <Route path='/blog/:blogId' element={<Blog/>} />
-        <Route path='/debate/:id' element={<Debate/>} />
+        <Route path='/debate/:debateId' element={<Debate/>} />
         <Route path='/createBlog' element={<CreateBlog/>} />
         <Route path='/settings' element={<Settings />} />
         <Route path='/createDebate' element={<CreateDebate />} />

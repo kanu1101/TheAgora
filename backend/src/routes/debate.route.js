@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/coreDebates', getCoreDebates);
 router.get('/userDebates', getUserDebates);
-router.post('/createDebate', createUserDebate);
+router.post('/createUserDebate', protectRoute, createUserDebate);
 router.delete('/:debateId/deleteDebate',protectRoute, deleteUserDebate);
 router.get('/:debateId/editDebate',protectRoute, editUserDebate);
 router.get('/searchDebates/:searchValue', searchUserDebates);

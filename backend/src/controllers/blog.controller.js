@@ -14,14 +14,12 @@ export const getBlogs = async (req, res) => {
 }
 export const getBlog = async (req, res) => {
     try {
-        console.log("getBlog initiated");
         const {blogId} = req.params;
         const blog = await Blog.findById(blogId).populate("authorId", "profilePic userName");
         if(!blog){
             console.log("couldn't find the blog");
             return res.status(400).json({message:"Couldn't find the blog you were looking for."});
         }
-        console.log("getBlog closing");
         return res.status(200).json(blog);
     } catch (error) {
         console.log("error in blog controller", error.message);

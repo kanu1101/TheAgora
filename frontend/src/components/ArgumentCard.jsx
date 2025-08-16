@@ -16,7 +16,8 @@ const ArgumentCard = ({side, authorName, content, profilePic, authorId, argument
     <div className= {side === "for" ? "justify-self-end" : "justify-self-start"} >
       <div className='flex gap-2 justify-between'>
         <div>
-          {user?._id === authorId && (<button onClick={handleDelete} >delete</button>)}
+          {user._id === authorId && (<button onClick={handleDelete} >delete</button>)}
+          {/* {true && (<button onClick={handleDelete} >delete</button>)} */}
         </div>
         <div className='flex gap-2 justify-start'>
           <img src={profilePic || placeholder} alt="author profile Pic" className='rounded-full w-5 h-5'/>
