@@ -8,7 +8,7 @@ const BlogCard = ({blogId, title, authorName, profilePic, date}) => {
 
   return (
     <>
-        <div onClick={() => navigate(`/blog/${blogId}`)} className='p-2 cursor-pointer h-1/5 text-black bg-blue-200 rounded-md flex flex-col'>
+        <div onClick={() => navigate(`/blog/${blogId}`)} className='p-5 cursor-pointer text-black bg-cyan-800 rounded-md flex flex-col'>
             <div className='flex gap-2'>
                 <div>
                     <img src={profilePic || placeholder} alt="profile pic" className='w-8 h-8 rounded-full'/>

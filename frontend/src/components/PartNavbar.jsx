@@ -16,10 +16,10 @@ const PartNavbar = ({triggerRef}) => {
     
   return (
 
-        <div className='flex p-4 bg-amber-400 rounded-b-md justify-between'>
+        <div className='flex p-4 bg-cyan-700 rounded-b-md justify-between'>
             <div>
                 <Link to="/">
-                    <h1 className='text-gray-700 font-bold text-2xl ' >TheAgora</h1>
+                    <h1 className='text-white font-bold text-2xl ' >TheAgora</h1>
                 </Link>
             </div>
             <div className='flex gap-10'>

@@ -25,9 +25,11 @@ export const DebateProvider = ({ children }) => {
   const getAuthorDebates = async () => {
     setLoading(true);
     try {
+      console.log("starting getAuthorDebates");
       const res = await axiosInstance.get(`/debate/getAuthorDebates`);
-      if(!res) return res.status(404).json({message: "no debates found."});
       setDebates(res.data);
+      console.log("successfully received data.");
+      console.log(debates.length);
     } catch (error) {
       alert("error in fetching Debates by you.")
       console.log("error in getAuthorDebates", error.response?.data?.message || error.message);
@@ -42,7 +44,6 @@ export const DebateProvider = ({ children }) => {
     try {
       const res = await axiosInstance.post('/debate/createUserDebate', debateData);
       setDebate(res.data);
-      console.log("debate received successfully.")
     } catch (error) {
       console.error('createDebate error', error.response?.data?.message || error.message);
     } finally {
@@ -66,10 +67,8 @@ export const DebateProvider = ({ children }) => {
   const getDebate = async (debateId, type) => {
     setLoading(true);
     try {
-      console.log("sending request")
       const res = await axiosInstance.get(`/debate/${debateId}/arguments`, { params: { type } });
       setDebate(res.data);
-      console.log("received arguments for debate");
     } catch (error) {
       console.error("getArguments error:", error.response?.data?.message || error.message);
       setDebate(null);
